@@ -16,7 +16,7 @@ from core_main_app.views.common import (
 from core_main_app.views.user import views as user_views, ajax as user_ajax
 
 urlpatterns = [
-    re_path(r"^$", user_views.homepage, name="core_main_app_homepage"),
+    #re_path(r"^$", user_views.homepage, name="core_main_app_homepage"),
     re_path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     re_path(
         "docs/api/",
