@@ -126,6 +126,7 @@ urlpatterns = [
         data_views.DataDownload.as_view(),
         name="core_main_app_rest_data_download",
     ),
+    re_path(r"^data/load/", views.DataLoad.as_view(), name='core_main_app_rest_data_load'),
     re_path(
         r"^data/query/keyword/$",
         data_views.ExecuteLocalKeywordQueryView.as_view(),
