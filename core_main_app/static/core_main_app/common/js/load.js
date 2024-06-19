@@ -1,4 +1,5 @@
 let load = function() {
+    var loadDocumentUrl = "{% url 'core_main_app_rest_data_download' data.data.id %}";
     console.log("Load URL: " + loadDocumentUrl);
 
     // Fetch the document data using its ID
