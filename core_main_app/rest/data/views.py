@@ -611,16 +611,11 @@ class DataLoad(APIView):
             data_object = Data.objects.get(pk=data_id)
             data_content = data_object.content
             data_content = format_content_xml(data_content)
-            target_url = '/gensel/'
-            response = HttpResponse(data_content, content_type='application/xml')
-            response['Content-Disposition'] = 'attachment; filename="data.xml"'
-            response['X-Sendfile'] = target_url
-            return response
-
+            return JsonResponse({'data_id': data_id, 'data_content': data_content}, status=200)
         except Data.DoesNotExist:
-            return Response({'error': 'Data object not found.'}, status=404)
+            return JsonResponse({'error': 'Data object not found.'}, status=404)
         except Exception as e:
-            return Response({'error': str(e)}, status=500)
+            return JsonResponse({'error': str(e)}, status=500)
             
 
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
