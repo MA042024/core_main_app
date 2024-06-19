@@ -9,17 +9,20 @@ var downloadOptions = function() {
 $(document).on('click', '.btn.download', downloadOptions);
 
 
-let load = function() {
-    var loadDocumentUrl = "{% url 'core_main_app_rest_data_download' data.data.id %}";
-    console.log("Load URL: " + loadDocumentUrl);
-
-    // Fetch the document data using its ID
-    fetch(loadDocumentUrl)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Loaded data:", data);
-        })
+var loadXmlData = function() {
+    var data_id = $(this).data('data-id');
+    $.ajax({
+        url: '/data/load/',
+        type: 'POST',
+        data: { 'data_id': data_id },
+        success: function(response) {
+            console.log('XML data sent successfully');
+            window.location.href = '/gensel/';
+        },
+        error: function(xhr, status, error) {
+            console.error('Error sending XML data:', error);
+        }
+    });
 };
 
-// Bind the click event of the load button to the load function
-$('.load-btn').on('click', load);
+$(document).on('click', '.load-btn', loadXmlData);
