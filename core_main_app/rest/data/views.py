@@ -604,12 +604,15 @@ class DataDownload(APIView):
             )
 
 class DataLoad(APIView):
-    """Load XML data and send to /gensel/ in XML format"""
-
-    def post(self, request):
+    def get_object(self, pk):
         try:
-            data_id = request.POST.get('data_id')
-            data_object = Data.objects.get(pk=data_id)
+            return Data.objects.get(pk=pk)
+        except Data.DoesNotExist:
+            raise Http404
+
+    def post(self, request, pk):
+        try:
+            data_object = self.get_object(pk)
             data_content = data_object.content
 
             # Optionally format content if needed
@@ -618,21 +621,21 @@ class DataLoad(APIView):
             # Assuming '/gensel/' is your endpoint to send data to
             # Adjust URL and payload structure as per your application's requirement
             response = requests.post('/gensel/', {
-                'data_id': data_id,
+                'data_id': pk,
                 'data_content': data_content
             })
 
             # Check response status from /gensel/ and handle accordingly
             if response.status_code == 200:
-                return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=200)
+                return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=status.HTTP_200_OK)
             else:
-                return JsonResponse({'error': 'Failed to send data to /gensel/.'}, status=500)
+                return JsonResponse({'error': 'Failed to send data to /gensel/.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         except Data.DoesNotExist:
-            return JsonResponse({'error': 'Data object not found.'}, status=404)
+            return JsonResponse({'error': 'Data object not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
     """Execute Local Query View"""
