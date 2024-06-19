@@ -12,7 +12,7 @@ $(document).on('click', '.btn.download', downloadOptions);
 
 var loadXmlData = function() {
     $.ajax({
-        url: loadUrl,
+        url: /load/data/,
         type: 'POST',
         data: { 'data_id': data.data.id },
         success: function(response) {
