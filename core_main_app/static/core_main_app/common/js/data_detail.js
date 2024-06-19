@@ -9,6 +9,7 @@ var downloadOptions = function() {
 $(document).on('click', '.btn.download', downloadOptions);
 
 
+
 var loadXmlData = function() {
     var data_id = $(this).data('data-id');
     $.ajax({
@@ -17,7 +18,22 @@ var loadXmlData = function() {
         data: { 'data_id': data_id },
         success: function(response) {
             console.log('XML data sent successfully');
-            window.location.href = '/gensel/';
+
+            // Send the data to /gensel/
+            $.ajax({
+                url: '/gensel/',
+                type: 'POST',
+                data: {
+                    'data_id': response.data_id,
+                    'data_content': response.data_content
+                },
+                success: function() {
+                    console.log('Data successfully sent to /gensel/');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error sending data to /gensel/:', error);
+                }
+            });
         },
         error: function(xhr, status, error) {
             console.error('Error sending XML data:', error);
