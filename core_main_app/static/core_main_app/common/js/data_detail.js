@@ -11,12 +11,10 @@ $(document).on('click', '.btn.download', downloadOptions);
 
 
 var loadXmlData = function() {
-    var data_id = $(this).data('data-id');
-    var loadUrl = $(this).data('load-url');
     $.ajax({
         url: loadUrl,
         type: 'POST',
-        data: { 'data_id': data_id },
+        data: { 'data_id': data.data.id },
         success: function(response) {
             console.log('XML data sent successfully');
             console.log(response.data_id);
