@@ -12,16 +12,16 @@ $(document).on('click', '.btn.download', downloadOptions);
 
 var loadXmlData = function() {
     var data_id = $(this).data('data-id');
+    var loadUrl = $(this).data('load-url');
     $.ajax({
-        url: '/data/load/',
+        url: loadUrl,
         type: 'POST',
         data: { 'data_id': data_id },
         success: function(response) {
             console.log('XML data sent successfully');
-            console.log(response.data_id);
-            console.log(response.data_content);
+
             // Send the data to /gensel/
-            /*$.ajax({
+            $.ajax({
                 url: '/gensel/',
                 type: 'POST',
                 data: {
@@ -34,7 +34,7 @@ var loadXmlData = function() {
                 error: function(xhr, status, error) {
                     console.error('Error sending data to /gensel/:', error);
                 }
-            });*/
+            });
         },
         error: function(xhr, status, error) {
             console.error('Error sending XML data:', error);
@@ -43,3 +43,4 @@ var loadXmlData = function() {
 };
 
 $(document).on('click', '.load-btn', loadXmlData);
+
