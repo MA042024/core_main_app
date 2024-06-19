@@ -6,7 +6,7 @@ let load = function() {
         .then(response => response.json())
         .then(data => {
             console.log("Loaded data:", data);
-
+        })
 };
 
 // Bind the click event of the load button to the load function
