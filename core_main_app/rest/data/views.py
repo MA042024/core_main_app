@@ -602,6 +602,26 @@ class DataDownload(APIView):
                 content, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+class DataLoad(APIView):
+    """Load XML data and send to /gensel/ in XML format"""
+
+    def post(self, request):
+        try:
+            data_id = request.POST.get('data_id')
+            data_object = Data.objects.get(pk=data_id)
+            data_content = data_object.content
+            data_content = format_content_xml(data_content)
+            target_url = '/gensel/'
+            response = HttpResponse(data_content, content_type='application/xml')
+            response['Content-Disposition'] = 'attachment; filename="data.xml"'
+            response['X-Sendfile'] = target_url
+            return response
+
+        except Data.DoesNotExist:
+            return Response({'error': 'Data object not found.'}, status=404)
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+            
 
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
     """Execute Local Query View"""
