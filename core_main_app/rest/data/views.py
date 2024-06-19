@@ -611,13 +611,28 @@ class DataLoad(APIView):
             data_id = request.POST.get('data_id')
             data_object = Data.objects.get(pk=data_id)
             data_content = data_object.content
+
+            # Optionally format content if needed
             data_content = format_content_xml(data_content)
-            return JsonResponse({'data_id': data_id, 'data_content': data_content}, status=200)
+
+            # Assuming '/gensel/' is your endpoint to send data to
+            # Adjust URL and payload structure as per your application's requirement
+            response = requests.post('/gensel/', {
+                'data_id': data_id,
+                'data_content': data_content
+            })
+
+            # Check response status from /gensel/ and handle accordingly
+            if response.status_code == 200:
+                return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=200)
+            else:
+                return JsonResponse({'error': 'Failed to send data to /gensel/.'}, status=500)
+
         except Data.DoesNotExist:
             return JsonResponse({'error': 'Data object not found.'}, status=404)
+
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
-            
 
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
     """Execute Local Query View"""
