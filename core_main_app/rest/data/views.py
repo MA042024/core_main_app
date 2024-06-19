@@ -6,6 +6,7 @@ import os
 
 from django.conf import settings
 from django.http import Http404
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import (
