@@ -10,4 +10,4 @@ let load = function() {
 };
 
 // Bind the click event of the load button to the load function
-$('.load-document-btn').on('click', load);
+$('.load-btn').on('click', load);
