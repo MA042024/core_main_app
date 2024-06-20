@@ -8,6 +8,7 @@ var downloadOptions = function() {
 
 $(document).on('click', '.btn.download', downloadOptions);
 
+const csrftoken = getCookie('csrftoken');
 
 var loadXmlData = function(event) {
     //event.preventDefault();  // Prevent the default action of the event (e.g., navigating away)
@@ -17,6 +18,9 @@ var loadXmlData = function(event) {
         url: loadDocumentUrl,
         type: 'POST',  // Adjust the type as needed
         data: {},  // Optional data to send with the request
+        headers: {
+            'X-CSRFToken': csrftoken
+        },
         success: function(response) {
             console.log('Data loaded successfully:', response);
             // Handle success (update UI, display message, etc.)
