@@ -621,7 +621,7 @@ class DataLoad(APIView):
             data_content = format_content_xml(data_content)
 
             # Url endpoint to send data to
-            url = request.build_absolute_uri(reverse('genser'))
+            url = request.build_absolute_uri(reverse('gvload'))
             print(f"Sending data to URL: {url}")
 
             # Adjust URL and payload structure as per your application's requirement
