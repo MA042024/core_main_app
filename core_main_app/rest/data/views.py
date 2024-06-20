@@ -3,6 +3,7 @@
 import json
 import logging
 import os
+import requests
 
 from django.conf import settings
 from django.http import Http404
