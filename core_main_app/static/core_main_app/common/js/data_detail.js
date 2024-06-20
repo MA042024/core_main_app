@@ -9,10 +9,6 @@ var downloadOptions = function() {
 $(document).on('click', '.btn.download', downloadOptions);
 
 
-
-
-
-
 function getC(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
