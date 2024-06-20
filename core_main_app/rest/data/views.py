@@ -622,6 +622,7 @@ class DataLoad(APIView):
 
             # Url endpoint to send data to
             url = request.build_absolute_uri(reverse('genselr'))
+            print(url)
             
             # Adjust URL and payload structure as per your application's requirement
             response = requests.post(url, {
@@ -629,6 +630,8 @@ class DataLoad(APIView):
                 'data_content': data_content
             })
 
+            print(response.status_code)
+            print(response.content)
             # Check response status from /gensel/ and handle accordingly
             if response.status_code == 200:
                 return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=status.HTTP_200_OK)
