@@ -8,8 +8,6 @@ var downloadOptions = function() {
 
 $(document).on('click', '.btn.download', downloadOptions);
 
-const csrftoken = getCookie('csrftoken');
-
 var loadXmlData = function(event) {
     //event.preventDefault();  // Prevent the default action of the event (e.g., navigating away)
     
