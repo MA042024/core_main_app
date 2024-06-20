@@ -8,7 +8,6 @@ var downloadOptions = function() {
 
 $(document).on('click', '.btn.download', downloadOptions);
 
-
 function getC(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -26,11 +25,13 @@ function getC(name) {
 }
 
 const csrftoken1 = getC('csrftoken');
-
+console.log('CSRF Token:', csrftoken1);  // Debugging: Print the CSRF token
 
 var loadXmlData = function(event) {
-    //event.preventDefault();  // Prevent the default action of the event (e.g., navigating away)
+    event.preventDefault();  // Prevent the default action of the event (e.g., navigating away)
     
+    console.log('loadDocumentUrl:', loadDocumentUrl);  // Debugging: Print the URL
+
     // Your data loading logic here
     $.ajax({
         url: loadDocumentUrl,
@@ -45,6 +46,9 @@ var loadXmlData = function(event) {
         },
         error: function(xhr, status, error) {
             console.error('Failed to load data:', error);
+            console.error('XHR:', xhr);  // Debugging: Print the XHR object
+            console.error('Status:', status);  // Debugging: Print the status
+            console.error('Error:', error);  // Debugging: Print the error
             // Handle error (display error message, etc.)
         }
     });
