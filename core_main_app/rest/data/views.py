@@ -629,6 +629,8 @@ class DataLoad(APIView):
                 'data_id': pk,
                 'data_content': data_content
             }
+            print(f"id:{pk}")
+            print(f"Content: {data_content}")
             
             headers = {
                 'Content-Type': 'application/json',
