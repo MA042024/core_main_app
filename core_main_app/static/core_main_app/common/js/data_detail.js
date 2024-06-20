@@ -8,24 +8,7 @@ var downloadOptions = function() {
 
 $(document).on('click', '.btn.download', downloadOptions);
 
-function getC(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-const csrftoken1 = getC('csrftoken');
-console.log('CSRF Token:', csrftoken1);  // Debugging: Print the CSRF token
+console.log('CSRF Token:', csrftoken);  // Debugging: Print the CSRF token
 
 var loadXmlData = function(event) {
     event.preventDefault();  // Prevent the default action of the event (e.g., navigating away)
@@ -38,7 +21,7 @@ var loadXmlData = function(event) {
         type: 'POST',  // Adjust the type as needed
         data: {},  // Optional data to send with the request
         headers: {
-            'X-CSRFToken': csrftoken1
+            'X-CSRFToken': csrftoken
         },
         success: function(response) {
             console.log('Data loaded successfully:', response);
