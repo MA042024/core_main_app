@@ -619,9 +619,11 @@ class DataLoad(APIView):
             # Optionally format content if needed
             data_content = format_content_xml(data_content)
 
-            # Assuming '/gensel/' is your endpoint to send data to
+            # Url endpoint to send data to
+            url = request.build_absolute_uri(reverse('genselr'))
+            
             # Adjust URL and payload structure as per your application's requirement
-            response = requests.post('/gensel/', {
+            response = requests.post(url, {
                 'data_id': pk,
                 'data_content': data_content
             })
