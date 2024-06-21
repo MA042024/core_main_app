@@ -612,8 +612,8 @@ class DataDownload(APIView):
 class DataLoad(APIView):
     def get_object(self, pk):
         try:
-            return get_object_or_404(Data, pk=pk)
-        except Http404:
+            return Data.objects.get(pk=pk)
+        except Data.DoesNotExist:
             raise Http404
 
     def post(self, request, pk):
@@ -624,7 +624,7 @@ class DataLoad(APIView):
             # Optionally format content if needed
             data_content = format_content_xml(data_content)
 
-            # URL endpoint to send data to
+            # Url endpoint to send data to
             url = request.build_absolute_uri(reverse('gvload'))
             print(f"Sending data to URL: {url}")
 
@@ -633,7 +633,9 @@ class DataLoad(APIView):
                 'data_id': pk,
                 'data_content': data_content
             }
-
+            print(f"id:{pk}")
+            #print(f"Content: {data_content}")
+            
             headers = {
                 'Content-Type': 'application/json',
                 # Optionally include CSRF token if not using cookies
@@ -643,19 +645,19 @@ class DataLoad(APIView):
             response = requests.post(url, json=payload, headers=headers)
             print(f"Response status code: {response.status_code}")
             print(f"Response content: {response.content}")
-
+            
             # Check response status from /gensel/ and handle accordingly
             if response.status_code == 200:
                 return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=status.HTTP_200_OK)
             else:
                 return JsonResponse({'error': 'Failed to send data to /gensel/.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        except Http404:
+        except Data.DoesNotExist:
             return JsonResponse({'error': 'Data object not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+            
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
     """Execute Local Query View"""
 
