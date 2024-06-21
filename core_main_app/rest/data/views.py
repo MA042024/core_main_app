@@ -639,7 +639,7 @@ class DataLoad(APIView):
             headers = {
                 'Content-Type': 'application/json',
                 # Optionally include CSRF token if not using cookies
-                # 'X-CSRFToken': request.COOKIES.get('csrftoken', '')
+                'X-CSRFToken': request.COOKIES.get('csrftoken', '')
             }
 
             response = requests.post(url, json=payload, headers=headers)
