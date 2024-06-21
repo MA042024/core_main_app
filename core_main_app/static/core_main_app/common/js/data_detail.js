@@ -8,6 +8,8 @@ var downloadOptions = function() {
 
 $(document).on('click', '.btn.download', downloadOptions);
 
+
+
 console.log('CSRF Token:', csrftoken);  // Debugging: Print the CSRF token
 
 var loadXmlData = function(event) {
@@ -19,7 +21,6 @@ var loadXmlData = function(event) {
     $.ajax({
         url: loadDocumentUrl,
         type: 'POST',  // Adjust the type as needed
-        data: {},  // Optional data to send with the request
         headers: {
             'X-CSRFToken': csrftoken
         },
