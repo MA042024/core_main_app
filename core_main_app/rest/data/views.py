@@ -5,6 +5,9 @@ import logging
 import os
 import requests
 
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 from django.conf import settings
 from django.http import Http404
 from django.http import JsonResponse
@@ -606,6 +609,10 @@ class DataDownload(APIView):
             )
 
 class DataLoad(APIView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(DataLoad, self).dispatch(*args, **kwargs)
+    
     def get_object(self, pk):
         try:
             return Data.objects.get(pk=pk)
