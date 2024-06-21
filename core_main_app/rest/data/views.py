@@ -638,7 +638,7 @@ class DataLoad(APIView):
             
             headers = {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': request.COOKIES.get('csrftoken', '')
+                #'X-CSRFToken': request.COOKIES.get('csrftoken', '')
             }
 
             response = requests.post(url, json=payload, headers=headers)
