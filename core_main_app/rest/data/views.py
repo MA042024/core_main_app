@@ -635,6 +635,7 @@ class DataLoad(APIView):
             }
             print(f"id:{pk}")
             #print(f"Content: {data_content}")
+            print(f"Cookie: {request.COOKIES.get('csrftoken', '')}")
             
             headers = {
                 'Content-Type': 'application/json',
