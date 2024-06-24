@@ -608,8 +608,11 @@ class DataDownload(APIView):
                 content, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-@csrf_exempt
 class DataLoad(APIView):
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_object(self, pk):
         try:
             return Data.objects.get(pk=pk)
