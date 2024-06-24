@@ -37,4 +37,4 @@ var loadXmlData = function(event) {
     });
 };
 
-/*$(document).on('click', '.load-btn', loadXmlData);*/
+$(document).on('click', '.load-btn', loadXmlData);
