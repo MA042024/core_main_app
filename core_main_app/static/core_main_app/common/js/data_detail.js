@@ -24,6 +24,7 @@ var loadXmlData = function(event) {
        /* headers: {
             'X-CSRFToken': csrftoken
         },*/
+        contentType: 'application/json',
         success: function(response) {
             console.log('Data loaded successfully:', response);
         },
