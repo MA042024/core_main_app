@@ -5,7 +5,7 @@ import logging
 import os
 import requests
 
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 from django.conf import settings
@@ -608,6 +608,7 @@ class DataDownload(APIView):
                 content, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+@csrf_exempt
 class DataLoad(APIView):
     def get_object(self, pk):
         try:
