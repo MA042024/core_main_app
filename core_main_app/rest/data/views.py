@@ -608,7 +608,6 @@ class DataDownload(APIView):
                 content, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-@method_decorator(csrf_protect, name='dispatch')
 class DataLoad(APIView):
     def get_object(self, pk):
         try:
