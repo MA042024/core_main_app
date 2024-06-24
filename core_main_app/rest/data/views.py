@@ -643,13 +643,12 @@ class DataLoad(APIView):
                 'X-CSRFToken': request.COOKIES.get('csrftoken', '')
             }
 
-            full_request = {
+            view_request = {
                 'url': url,
                 'method': 'POST',
-                'headers': headers,
-                'payload': payload
+                'headers': headers
             }
-            print(f"Full Request: {json.dumps(full_request, indent=4)}")
+            print(f"Full Request: {json.dumps(view_request, indent=4)}")
             
             response = requests.post(url, json=payload, headers=headers)
             print(f"Response status code: {response.status_code}")
