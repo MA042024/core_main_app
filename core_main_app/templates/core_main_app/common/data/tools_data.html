@@ -11,8 +11,8 @@
         <i class="fas fa-download"></i> Download
     </button>
     <!-- Load Button -->
-    <form id="load-form" method="post" action="{% url 'core_main_app_rest_data_load' data.data.id  %}>
-        {% csrf_token %}
+    <form id="load-form" method="post">
+       {% comment %} {% csrf_token %} {% endcomment %}
         <button type="submit" class="btn btn-secondary load-btn
             {% if BOOTSTRAP_VERSION|first == "4" %}float-right{% elif BOOTSTRAP_VERSION|first == "5"  %}float-end{% endif %}
             {% if BOOTSTRAP_VERSION|first == "4" %}mr-1{% elif BOOTSTRAP_VERSION|first == "5"  %}me-1{% endif %}">
