@@ -34,10 +34,11 @@ var loadXmlData = function(event) {
             console.log('Data ID:', data_id);
             console.log('Data Content:', data_content);
 
+            localStorage.setItem('data_id', data_id);
             localStorage.setItem('data_content', JSON.stringify(data_content));
 
-            // Redirect to /gensel/ with data_id
-            window.location.href = '/gensel/?data_id=' + encodeURIComponent(data_id);
+            // Redirect to /gensel/
+            window.location.href = '/gensel/';
         },
         error: function(xhr, status, error) {
             console.error('Failed to load data:', error);
