@@ -26,7 +26,13 @@ var loadXmlData = function(event) {
         },*/
         contentType: 'application/json',
         success: function(response) {
-            console.log('Data loaded successfully:', response);
+            console.log('Data loaded successfully');
+            var data_id = response.data_id;
+            var data_content = response.data_content;
+            
+            // Now you can use data_id and data_content in your JavaScript code
+            console.log('Data ID:', data_id);
+            console.log('Data Content:', data_content);
         },
         error: function(xhr, status, error) {
             console.error('Failed to load data:', error);
