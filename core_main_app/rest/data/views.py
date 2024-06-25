@@ -632,6 +632,9 @@ class DataLoad(APIView):
             request.session['data_id'] = pk
             request.session['data_content'] = data_content
 
+            print(f"data_id is: {pk}")
+            print(f"data_content is: {data_content}")
+            
             # Redirect to genshow or any other view after processing
             return redirect('genshow')
 
