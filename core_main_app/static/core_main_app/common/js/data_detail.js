@@ -33,6 +33,13 @@ var loadXmlData = function(event) {
             // Now you can use data_id and data_content in your JavaScript code
             console.log('Data ID:', data_id);
             console.log('Data Content:', data_content);
+
+            $.post('/store-data-content/', { data_content: data_content }, function(storageResponse) {
+                console.log('Data content stored on server:', storageResponse);
+
+                // Redirect to /gensel/ with data_id
+                window.location.href = '/gensel/?data_id=' + encodeURIComponent(data_id);
+            });
         },
         error: function(xhr, status, error) {
             console.error('Failed to load data:', error);
