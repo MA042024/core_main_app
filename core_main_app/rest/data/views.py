@@ -627,6 +627,7 @@ class DataLoad(APIView):
 
             # Optionally format content if needed
             data_content = format_content_xml(data_content)
+            data_content = data_content.replace(" ", "").replace("\n", "")
             
             # Store the data in the session
             request.session['data_id'] = pk
