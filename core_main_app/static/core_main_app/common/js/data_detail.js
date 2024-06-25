@@ -37,8 +37,7 @@ var loadXmlData = function(event) {
             localStorage.setItem('data_id', data_id);
             localStorage.setItem('data_content', JSON.stringify(data_content));
 
-            // Redirect to /gensel/
-            window.location.href = '/gensel/';
+            window.location.href = '/gensel';
         },
         error: function(xhr, status, error) {
             console.error('Failed to load data:', error);
