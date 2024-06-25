@@ -8,6 +8,7 @@ import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+from django.shortcuts import redirect
 from django.conf import settings
 from django.http import Http404
 from django.http import JsonResponse
@@ -626,48 +627,21 @@ class DataLoad(APIView):
 
             # Optionally format content if needed
             data_content = format_content_xml(data_content)
-
-            # Url endpoint to send data to
-            url = request.build_absolute_uri(reverse('gvload'))
-            print(f"Sending data to URL: {url}")
-
-            # Adjust URL and payload structure as per your application's requirement
-            payload = {
-                'data_id': pk,
-                'data_content': data_content
-            }
-            print(f"id:{pk}")
-            #print(f"Content: {data_content}")
-            print(f"Cookie: {request.COOKIES.get('csrftoken', '')}")
             
-            headers = {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': request.COOKIES.get('csrftoken', '')
-            }
+            # Store the data in the session
+            request.session['data_id'] = pk
+            request.session['data_content'] = data_content
 
-            view_request = {
-                'url': url,
-                'method': 'POST',
-                'headers': headers
-            }
-            print(f"Full Request: {json.dumps(view_request, indent=4)}")
-            
-            response = requests.post(url, json=payload, headers=headers)
-            print(f"Response status code: {response.status_code}")
-            print(f"Response content: {response.content}")
-            
-            # Check response status from /gensel/ and handle accordingly
-            if response.status_code == 200:
-                return JsonResponse({'message': 'Data sent to /gensel/ successfully.'}, status=status.HTTP_200_OK)
-            else:
-                return JsonResponse({'error': 'Failed to send data to /gensel/.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # Redirect to genshow or any other view after processing
+            return redirect('genshow')
 
         except Data.DoesNotExist:
-            return JsonResponse({'error': 'Data object not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'error': 'Data object not found.'}, status=404)
 
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
+            return JsonResponse({'error': str(e)}, status=500)
+
+
 class ExecuteLocalQueryView(AbstractExecuteLocalQueryView):
     """Execute Local Query View"""
 
