@@ -634,9 +634,12 @@ class DataLoad(APIView):
 
             print(f"data_id is: {pk}")
             print(f"data_content is: {data_content}")
-            
-            # Redirect to genshow or any other view after processing
-            return redirect('genshow')
+
+            # Return JSON response with data
+            return JsonResponse({
+                'data_id': pk,
+                'data_content': data_content
+            })
 
         except Data.DoesNotExist:
             return JsonResponse({'error': 'Data object not found.'}, status=404)
