@@ -29,7 +29,7 @@ var loadXmlData = function(event) {
             console.log('Data loaded successfully');
             var data_id = response.data_id;
             var data_content = response.data_content;
-            var data_content = response.data_title;
+            var data_title = response.data_title;
             
             console.log('Data ID:', data_id);
             console.log('Data Content:', data_content);
