@@ -29,13 +29,15 @@ var loadXmlData = function(event) {
             console.log('Data loaded successfully');
             var data_id = response.data_id;
             var data_content = response.data_content;
+            var data_content = response.data_title;
             
-            // Now you can use data_id and data_content in your JavaScript code
             console.log('Data ID:', data_id);
             console.log('Data Content:', data_content);
+            console.log('Data Title:', data_title);
 
             localStorage.setItem('data_id', data_id);
             localStorage.setItem('data_content', JSON.stringify(data_content));
+            localStorage.setItem('data_title', data_title);
 
             window.location.href = '/gensel';
         },
