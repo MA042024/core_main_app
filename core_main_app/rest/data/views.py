@@ -624,22 +624,25 @@ class DataLoad(APIView):
         try:
             data_object = self.get_object(pk)
             data_content = data_object.content
+            data_title = data_object.title
 
             # Optionally format content if needed
             data_content = format_content_xml(data_content)
-            #data_content = data_content.replace("\n", "")
             
             # Store the data in the session
             request.session['data_id'] = pk
             request.session['data_content'] = data_content
+            request.session['data_title'] = data_title
 
             print(f"data_id is: {pk}")
             print(f"data_content is: {data_content}")
+            print(f"data_title is: {data_title}")
 
             # Return JSON response with data
             return JsonResponse({
                 'data_id': pk,
-                'data_content': data_content
+                'data_content': data_content,
+                'data_title': data_title
             })
 
         except Data.DoesNotExist:
