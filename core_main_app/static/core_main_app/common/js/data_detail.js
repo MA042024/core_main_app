@@ -35,7 +35,7 @@ var loadXmlData = function(event) {
             console.log('Data Content:', data_content);
             console.log('Data Title:', data_title);
 
-            localStorage.setItem('data_id', data_id);
+            /*localStorage.setItem('data_id', data_id);*/
             localStorage.setItem('data_content', JSON.stringify(data_content));
             localStorage.setItem('data_title', data_title);
 
