@@ -632,10 +632,6 @@ class DataLoad(APIView):
             request.session['data_content'] = data_content
             request.session['data_title'] = data_title
 
-            print(f"data_id is: {pk}")
-            print(f"data_content is: {data_content}")
-            print(f"data_title is: {data_title}")
-
             # Return JSON response with data
             return JsonResponse({
                 'data_id': pk,
