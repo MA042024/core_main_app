@@ -5,7 +5,6 @@ import logging
 import os
 import requests
 
-from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 
 from django.shortcuts import redirect
@@ -610,7 +609,6 @@ class DataDownload(APIView):
             )
 
 class DataLoad(APIView):
-    @csrf_protect
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
     
