@@ -20,12 +20,8 @@ var loadXmlData = function(event) {
             var data_id = response.data_id;
             var data_content = response.data_content;
             var data_title = response.data_title;
-            /*localStorage.setItem('data_content', JSON.stringify(data_content));
-            localStorage.setItem('data_title', data_title);
-            sessionStorage.setItem('data_id', data_id);*/
             sessionStorage.setItem('data_content', JSON.stringify(data_content));
-            sessionStorage.setItem('data_title', data_title);
-            
+            sessionStorage.setItem('data_title', data_title);    
             window.location.href = '/gensel';
         },
         error: function(xhr, status, error) {
