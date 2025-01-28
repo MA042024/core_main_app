@@ -1,0 +1,1 @@
+This repository is used by the AsphaltMine source file. It includes the NIST CDCS core_main_app repository, with several modifications applied, particularly to incorporate the loading of records into the GV Form in AsphaltMine.
